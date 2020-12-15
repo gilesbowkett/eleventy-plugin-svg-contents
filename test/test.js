@@ -23,15 +23,15 @@ describe('SVG Test', function() {
     });
 
     it('Returns SVG contents when provided SVG file', function() {
-      const getSVGContents = new GetSVGContents('/sample/simple.svg');
+      const getSVGContents = new GetSVGContents('./sample/simple.svg');
       let svg = Cheerio.load(getSVGContents.getSvg())
-      
+
       assert.equal(svg.html(), testSvg.html());
     });
 
     it('Returns symbol contents when provided symbol in SVG file', function() {
       const selector = 'symbol';
-      const getSVGContents = new GetSVGContents('/sample/symbol.svg', '', selector);
+      const getSVGContents = new GetSVGContents('./sample/symbol.svg', '', selector);
       let svg = Cheerio.load(getSVGContents.getSvg());
 
       assert.equal(svg(selector).prop('tagName'), testSymbol(selector).prop('tagName'))
@@ -40,13 +40,13 @@ describe('SVG Test', function() {
   describe('Add Class', function() {
     it('Returns an SVG with the right class', function () {
       const className = 'classname'
-      const getSVGContents = new GetSVGContents('/sample/simple.svg', className);
+      const getSVGContents = new GetSVGContents('./sample/simple.svg', className);
       let svg = Cheerio.load(getSVGContents.getSvg());
       let svgClass = svg('svg').attr('class')
       assert.equal(svgClass, className)
     });
     it('Returns an SVG with no class if no className provided', function () {
-      const getSVGContents = new GetSVGContents('/sample/simple.svg');
+      const getSVGContents = new GetSVGContents('./sample/simple.svg');
       let svg = Cheerio.load(getSVGContents.getSvg());
       let svgClass = svg('svg').hasClass('');
       assert.equal(svgClass, false)
@@ -55,17 +55,17 @@ describe('SVG Test', function() {
     it('Returns a Symbol with the right class', function () {
       const className = 'classname';
       const selector = 'symbol';
-      
-      const getSVGContents = new GetSVGContents('/sample/symbol.svg', className, selector);
+
+      const getSVGContents = new GetSVGContents('./sample/symbol.svg', className, selector);
       let svg = Cheerio.load(getSVGContents.getSvg());
       let elementClass = svg(selector).attr('class')
-      
+
       assert.equal(elementClass, className)
     });
     it('Returns a Symbol with no class if no className provided', function () {
       const selector = 'symbol';
-      const getSVGContents = new GetSVGContents('/sample/symbol.svg', '', selector);
-      
+      const getSVGContents = new GetSVGContents('./sample/symbol.svg', '', selector);
+
       let svg = Cheerio.load(getSVGContents.getSvg());
       let svgClass = svg(selector).hasClass('');
 
